@@ -9,16 +9,35 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     let eggTime = [
-        "Soft": 5,
-        "Medium": 7,
-        "Hard": 12
+        "Soft": 3, // 300,
+        "Medium": 5,// 420,
+        "Hard": 7//720
     ]
-    
+    var timer = Timer()
+    var secondsRemaining = 60
+
+    @IBOutlet weak var countDownLabel: UILabel!
+
     @IBAction func hardnessSelected(_ sender: UIButton) {
+        print("Instantiate \(sender.currentTitle!)")
         let hardness = sender.currentTitle!
-        print(eggTime[hardness]!)
+
+        secondsRemaining = eggTime[hardness]!
+        // just in case this button is tapped multiple times
+        timer.invalidate()
+        // start the timer
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        secondsRemaining -= 1
+        countDownLabel.text = String(secondsRemaining)
+
+        if secondsRemaining == 0 {
+            timer.invalidate()
+            countDownLabel.text = "It's time!"
+        }
     }
     
 }
