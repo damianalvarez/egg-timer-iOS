@@ -12,9 +12,9 @@ import AVFoundation
 class ViewController: UIViewController {
 
     let eggTime = [
-        "Soft": 3, // 300,
-        "Medium": 5,// 420,
-        "Hard": 7//720
+        "Soft": 300,
+        "Medium": 420,
+        "Hard": 720
     ]
     
     var timer = Timer()
